@@ -1,0 +1,147 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ABSJ - Viagens Áreas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #259CCC;">
+      <div class="container-fluid">
+          <a class="navbar-brand" style="color: #FFFFFF;" href="#">ABSJ - Viagens Áreas</a>
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+  </nav>
+
+  <main style="width: 100vw; height: 100vh;">
+    
+    <div style="margin: 100px auto; background-color: #259CCC; display: block;" id="dataContainer" class="form-container">
+        <h1 style="text-align: center; padding-bottom: 30px;">Dados de {{session['nome']}}</h1>
+        
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="email" style="width: 120px; display: block; text-align: center;">Nome</span>
+          <input type="text" class="form-control" value="{{session['nome']}}">
+        </div>
+        
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="email" style="width: 120px; display: block; text-align: center;">Nascimento</span>
+          <input type="text" class="form-control" value="{{session['nasc']}}">
+        </div>
+        
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="email" style="width: 120px; display: block; text-align: center;">CPF</span>
+          <input type="text" class="form-control" value="{{session['cpf']}}">
+        </div>
+  
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="email" style="width: 120px; display: block; text-align: center;">Telefone</span>
+          <input type="text" class="form-control" value="{{session['telefone']}}">
+        </div>
+        
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="email" style="width: 120px; display: block; text-align: center;">Email</span>
+          <input type="text" class="form-control" value="{{session['email']}}">
+        </div>
+        
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="email" style="width: 120px; display: block; text-align: center;">Senha</span>
+          <input type="text" class="form-control" value="{{session['senha']}}">
+        </div>
+        <div style="display: flex; width: 100%; flex-direction: row;">
+          <a href="{{url_for('cliente./home')}}" class="btn center-block submit-button-gl-hgd" style="display: block; margin: 0 auto;">Voltar</a>
+          <button type="button" id="toggleButton" class="btn center-block submit-button-gl-hgd" style="display: block; margin: 0 auto;">Editar Dados</button>
+        </div>
+      </div>
+      <!-- COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM -->
+      <!-- COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM -->
+      <!-- COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM -->
+      <!-- COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM | COMEÇO DO FORM -->
+      <div class="form-container" id="updateForm" style="background-color: #259CCC; display: None;">
+        <label for="cadastroForm" class="form-title">Dados de {{session['nome']}}</label>
+        <form action='/cliente/atualizar' method="POST" id="cadastroForm" title="Cadastro">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nome: <span class="required-tag">*</span></label>
+          <input type="text" value="{{session['nome']}}" name="name" class="form-control" id="name" required>
+        </div>
+        
+        <div class="mb-3">
+          <!-- Tentei por  value="{{session['nasc']}}", nao pegou, desisti -->
+          <label for="nasc" class="form-label">Data de Nascimento: <span class="required-tag">*</span></label>
+          <input type="date" value="{{session["nasc"]}}" name="nasc" class="form-control" id="nasc" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="cpf" class="form-label">CPF: <span class="required-tag">*</span></label>
+          <input type="text" value="{{session['cpf']}}" name="cpf" class="form-control" minlength="11" maxlength="11" id="cpf" placeholder="XXX.XXX.XXX-XX" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="telefone" class="form-label">Telefone: <span class="required-tag">*</span></label>
+          <input type="tel" value="{{session['telefone']}}" name="telefone" class="form-control" minlength="11" maxlength="11" id="telefone" placeholder="DD + 9 + Número" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="email" class="form-label">Email: <span class="required-tag">*</span></label>
+          <input type="email" value="{{session['email']}}" name="email" class="form-control" id="email" placeholder="joaojoaquim@mail.com" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="senha" class="form-label">Senha: <span class="required-tag">*</span></label>
+          <input type="password" value="{{session['nome']}}" name="senha" class="form-control" id="senha" placeholder="S2e2!@$dq2" required>
+        </div>
+
+        <div class="flex-container">
+          <button type="button" class="btn center-block submit-button-gl-hgd" id="cancelButton" style="display: block; margin: 0 auto;">Cancelar</button>
+          <button type="submit" class="btn center-block submit-button-gl-hgd">Salvar Alterações</button>
+        </div>
+        
+      </form>
+    </div>
+  </main>
+  
+  <script>
+    const toggleButton = document.getElementById("toggleButton");
+    const dataContainer = document.getElementById("dataContainer");
+    const updateForm = document.getElementById("updateForm");
+    const cancelButton = document.getElementById("cancelButton");
+  
+    toggleButton.addEventListener('click', () => {
+      dataContainer.style.display = "none"; 
+      updateForm.style.display = "block";   
+    });
+
+    cancelButton.addEventListener('click', () => {
+      dataContainer.style.display = "block";
+      updateForm.style.display = "none";
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+<!--<footer style="background-color: black; width: 100vw; padding: 0; margin: 0;">
+  <div class="pages">
+    <ul>
+      <li> Login
+        <li> Cadastro
+          <li> Mapa do Site
+            </ul>
+    </div>
+    <div class="social">
+      <ul>
+        <li> Instagram
+        <li> YouTube
+        <li> Twitter
+      </ul>
+    </div>
+    <div class="contact">
+      <ul>
+        <li> WhatsApp
+        <li> E-mail
+        <li> Imprensa
+      </ul>
+    </div>
+  </footer>-->
+</html>
